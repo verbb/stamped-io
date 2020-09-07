@@ -1,6 +1,6 @@
 {
     "name": "verbb/stamped-io",
-    "description": "Integration with Stamped.io",
+    "description": "Send your order data from Craft Commerce to Stamped.io, for your customers to review.",
     "type": "craft-plugin",
     "version": "1.0.0",
     "keywords": [
@@ -37,7 +37,7 @@
         "name": "Stamped",
         "handle": "stamped-io",
         "schemaVersion": "1.0.0",
-        "changelogUrl": "https://raw.githubusercontent.com/verbb/stamped-io/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/stamped-io/craft-3/CHANGELOG.md",
         "class": "verbb\\stamped\\Stamped"
     }
 }
