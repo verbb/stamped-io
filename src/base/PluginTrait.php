@@ -5,8 +5,11 @@ use verbb\stamped\Stamped;
 use verbb\stamped\services\Service;
 
 use Craft;
+use craft\log\FileTarget;
 
-use putyourlightson\logtofile\LogToFile;
+use yii\log\Logger;
+
+use verbb\base\BaseHelper;
 
 trait PluginTrait
 {
@@ -26,12 +29,12 @@ trait PluginTrait
 
     public static function log($message)
     {
-        LogToFile::info($message, 'stamped');
+        Craft::getLogger()->log($message, Logger::LEVEL_INFO, 'stamped-io');
     }
 
     public static function error($message)
     {
-        LogToFile::error($message, 'stamped');
+        Craft::getLogger()->log($message, Logger::LEVEL_ERROR, 'stamped-io');
     }
 
 
@@ -43,6 +46,13 @@ trait PluginTrait
         $this->setComponents([
             'service' => Service::class,
         ]);
+
+        BaseHelper::registerModule();
+    }
+
+    private function _setLogging()
+    {
+        BaseHelper::setFileLogging('stamped-io');
     }
 
 }

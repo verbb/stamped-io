@@ -2,6 +2,7 @@
 namespace verbb\stamped;
 
 use verbb\stamped\base\PluginTrait;
+use verbb\stamped\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
@@ -13,6 +14,13 @@ use yii\base\Event;
 
 class Stamped extends Plugin
 {
+    // Public Properties
+    // =========================================================================
+
+    public $schemaVersion = '1.0.0';
+    public $hasCpSettings = true;
+
+
     // Traits
     // =========================================================================
 
@@ -29,8 +37,26 @@ class Stamped extends Plugin
         self::$plugin = $this;
 
         $this->_setPluginComponents();
+        $this->_setLogging();
         $this->_registerEventHandlers();
     }
+
+
+    // Protected Methods
+    // =========================================================================
+
+    protected function createSettingsModel(): Settings
+    {
+        return new Settings();
+    }
+
+    protected function settingsHtml()
+    {
+        return Craft::$app->view->renderTemplate('stamped-io/settings', [
+            'settings' => $this->getSettings(),
+        ]);
+    }
+    
 
     // Private Methods
     // =========================================================================

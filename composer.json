@@ -26,12 +26,11 @@
     ],
     "require": {
         "craftcms/cms": "^3.1.0",
-        "putyourlightson/craft-log-to-file": "^1.0.0",
         "verbb/base": "^1.0.2"
     },
     "autoload": {
         "psr-4": {
-          "verbb\\stamped-io\\": "src/"
+          "verbb\\stamped\\": "src/"
         }
     },
     "extra": {
@@ -39,6 +38,6 @@
         "handle": "stamped-io",
         "schemaVersion": "1.0.0",
         "changelogUrl": "https://raw.githubusercontent.com/verbb/stamped-io/master/CHANGELOG.md",
-        "class": "verbb\\stamped-io\\Stamped"
+        "class": "verbb\\stamped\\Stamped"
     }
 }
