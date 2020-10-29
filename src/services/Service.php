@@ -74,7 +74,7 @@ class Service extends Component
             
             'orderNumber' => $order->id,
             'orderId' => $order->id,
-            'orderCurrencyISO' => $currency->iso,
+            'orderCurrencyISO' => (string)$currency,
             'orderTotalPrice' => $order->totalPrice,
             'orderSource' => 'web',
             'source' => 'web',
