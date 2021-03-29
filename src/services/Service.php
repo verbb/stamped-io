@@ -63,8 +63,6 @@ class Service extends Component
 
     private function _getPayload($order)
     {
-        $currency = Commerce::getInstance()->getPaymentCurrencies()->getPaymentCurrencyByIso($order->paymentCurrency);
-
         $payload = [
             'email' => $order->email,
             'firstName' => $order->billingAddress->firstName ?? '',
@@ -74,7 +72,7 @@ class Service extends Component
             
             'orderNumber' => $order->id,
             'orderId' => $order->id,
-            'orderCurrencyISO' => (string)$currency,
+            'orderCurrencyISO' => $order->paymentCurrency,
             'orderTotalPrice' => $order->totalPrice,
             'orderSource' => 'web',
             'source' => 'web',
