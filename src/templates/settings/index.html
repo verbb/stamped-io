@@ -25,3 +25,19 @@
     value: settings.storeHash,
     warning: macros.configWarning('storeHash', 'stamped-io'),
 }) }}
+
+{{ forms.textField({
+    label: 'Product Image Handle' | t('stamped-io'),
+    instructions: 'Field to access product images.' | t('stamped-io'),
+    name: 'productImageField',
+    value: settings.productImageField,
+    warning: macros.configWarning('productImageField', 'stamped-io'),
+}) }}
+
+{{ forms.textField({
+    label: 'Product Image Transformation Handle' | t('stamped-io'),
+    instructions: 'Image field transformation to apply.' | t('stamped-io'),
+    name: 'productImageFieldTransformation',
+    value: settings.productImageFieldTransformation,
+    warning: macros.configWarning('productImageFieldTransformation', 'stamped-io'),
+}) }}
