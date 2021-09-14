@@ -89,10 +89,17 @@ class Service extends Component
             }
             
             $productImageField = $settings->productImageField;
-            if (isset($product->$productImageField)) {
-                if ($image = $product->$productImageField->one()) {
+            
+            if ( $variant->$productImageField && is_iterable($variant->$productImageField) ) {
+                if ($image = $variant->$productImageField->one()) {
                     $imageUrl = $image->getUrl($settings->productImageFieldTransformation,true);
                 }
+            } else {
+                if ( $product->$productImageField && is_iterable($product->$productImageField) ) {
+                    if ($image = $product->$productImageField->one()) {
+                        $imageUrl = $image->getUrl($settings->productImageFieldTransformation,true);
+                    }
+                }   
             }
 
             $payload['itemsList'][] = [
