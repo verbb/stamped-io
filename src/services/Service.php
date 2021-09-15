@@ -88,6 +88,8 @@ class Service extends Component
                 $product = $lineItem->purchasable->product;
             }
             
+            $variant = $lineItem->purchasable;
+            
             $productImageField = $settings->productImageField;
             
             if ( $variant->$productImageField && is_iterable($variant->$productImageField) ) {
