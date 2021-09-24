@@ -92,16 +92,14 @@ class Service extends Component
             
             $productImageField = $settings->productImageField;
             
-            if ( count($variant->$productImageField) && is_iterable($variant->$productImageField) ) {
+            if ( $variant->$productImageField && $variant->$productImageField->count() ) {
                 if ($image = $variant->$productImageField->one()) {
-                    $imageUrl = $image->getUrl($settings->productImageFieldTransformation,true);
+                    $lineItemProperties['ImageURL'] = $image->getUrl($settings->productImageFieldTransformation,true);
                 }
-            } else {
-                if ( count($product->$productImageField) && is_iterable($product->$productImageField) ) {
-                    if ($image = $product->$productImageField->one()) {
-                        $imageUrl = $image->getUrl($settings->productImageFieldTransformation,true);
-                    }
-                }   
+            } else if ( $product->$productImageField && $product->$productImageField->count() ) {
+                if ($image = $product->$productImageField->one()) {
+                    $lineItemProperties['ImageURL'] = $image->getUrl($settings->productImageFieldTransformation,true);
+                }
             }
 
             $payload['itemsList'][] = [
