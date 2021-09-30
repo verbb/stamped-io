@@ -120,10 +120,13 @@ class Service extends Component
     private function _getClient()
     {
         $settings = Stamped::$plugin->getSettings();
+        $keyPublic = Craft::parseEnv($settings->keyPublic);
+        $keyPrivate = Craft::parseEnv($settings->keyPrivate);
+        $storeHash = Craft::parseEnv($settings->storeHash);
 
         return Craft::createGuzzleClient([
-            'base_uri' => "https://stamped.io/api/v2/{$settings->storeHash}/",
-            'auth' => [$settings->keyPublic, $settings->keyPrivate],
+            'base_uri' => "https://stamped.io/api/v2/{$storeHash}/",
+            'auth' => [$keyPublic, $keyPrivate],
         ]);
     }
 

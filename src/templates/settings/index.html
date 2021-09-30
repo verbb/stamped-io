@@ -1,45 +1,50 @@
 {% import '_includes/forms' as forms %}
 {% import 'verbb-base/_macros' as macros %}
 
-{{ forms.textField({
+{{ forms.autosuggestField({
     first: true,
     label: 'API Key Public' | t('stamped-io'),
     instructions: 'Enter the API Key Public from your Stamped.io account.' | t('stamped-io'),
     required: true,
+    suggestEnvVars: true,
     name: 'keyPublic',
     value: settings.keyPublic,
     warning: macros.configWarning('keyPublic', 'stamped-io'),
 }) }}
 
-{{ forms.textField({
+{{ forms.autosuggestField({
     label: 'API Key Private' | t('stamped-io'),
     instructions: 'Enter the API Key Private from your Stamped.io account.' | t('stamped-io'),
     required: true,
+    suggestEnvVars: true,
     name: 'keyPrivate',
     value: settings.keyPrivate,
     warning: macros.configWarning('keyPrivate', 'stamped-io'),
 }) }}
 
-{{ forms.textField({
+{{ forms.autosuggestField({
     label: 'Store Hash' | t('stamped-io'),
-    instructions: 'Enter the Store Hash from your Stamped.io account.' | t('stamped-io'),
+    instructions: 'Enter the Store Hash (or Store URL) from your Stamped.io account.' | t('stamped-io'),
     required: true,
+    suggestEnvVars: true,
     name: 'storeHash',
     value: settings.storeHash,
     warning: macros.configWarning('storeHash', 'stamped-io'),
 }) }}
 
-{{ forms.textField({
+{{ forms.autosuggestField({
     label: 'Product Image Handle' | t('stamped-io'),
     instructions: 'Field to access product images.' | t('stamped-io'),
+    suggestEnvVars: true,
     name: 'productImageField',
     value: settings.productImageField,
     warning: macros.configWarning('productImageField', 'stamped-io'),
 }) }}
 
-{{ forms.textField({
+{{ forms.autosuggestField({
     label: 'Product Image Transformation Handle' | t('stamped-io'),
     instructions: 'Image field transformation to apply.' | t('stamped-io'),
+    suggestEnvVars: true,
     name: 'productImageFieldTransformation',
     value: settings.productImageFieldTransformation,
     warning: macros.configWarning('productImageFieldTransformation', 'stamped-io'),
