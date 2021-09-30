@@ -5,6 +5,7 @@
     first: true,
     label: 'API Key Public' | t('stamped-io'),
     instructions: 'Enter the API Key Public from your Stamped.io account.' | t('stamped-io'),
+    required: true,
     name: 'keyPublic',
     value: settings.keyPublic,
     warning: macros.configWarning('keyPublic', 'stamped-io'),
@@ -13,6 +14,7 @@
 {{ forms.textField({
     label: 'API Key Private' | t('stamped-io'),
     instructions: 'Enter the API Key Private from your Stamped.io account.' | t('stamped-io'),
+    required: true,
     name: 'keyPrivate',
     value: settings.keyPrivate,
     warning: macros.configWarning('keyPrivate', 'stamped-io'),
@@ -21,6 +23,7 @@
 {{ forms.textField({
     label: 'Store Hash' | t('stamped-io'),
     instructions: 'Enter the Store Hash from your Stamped.io account.' | t('stamped-io'),
+    required: true,
     name: 'storeHash',
     value: settings.storeHash,
     warning: macros.configWarning('storeHash', 'stamped-io'),
