@@ -12,6 +12,6 @@ class Settings extends Model
     public $keyPublic = '';
     public $keyPrivate = '';
     public $productImageField = '';
-    public $productImageFieldTransformation = '';
+    public $productImageFieldTransform = '';
 
 }
