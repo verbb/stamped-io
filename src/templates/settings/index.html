@@ -32,20 +32,46 @@
     warning: macros.configWarning('storeHash', 'stamped-io'),
 }) }}
 
-{{ forms.autosuggestField({
-    label: 'Product Image Handle' | t('stamped-io'),
-    instructions: 'Field to access product images.' | t('stamped-io'),
-    suggestEnvVars: true,
+{% set assetFields = [{
+    label: 'Select an option' | t('stamped-io'),
+    value: '',
+}] %}
+
+{% for field in craft.app.getFields().getAllFields() %}
+    {% if className(field) == 'craft\fields\Assets' %}
+        {% set assetFields = assetFields | merge([{
+            label: field.name,
+            value: field.handle,
+        }]) %}
+    {% endif %}
+{% endfor %}
+
+{{ forms.selectField({
+    label: 'Product Image' | t('stamped-io'),
+    instructions: 'Select the asset field used for your product image. This can be an asset field on the product or individual variant.' | t('stamped-io'),
     name: 'productImageField',
     value: settings.productImageField,
+    options: assetFields,
     warning: macros.configWarning('productImageField', 'stamped-io'),
 }) }}
 
-{{ forms.autosuggestField({
-    label: 'Product Image Transformation Handle' | t('stamped-io'),
-    instructions: 'Image field transformation to apply.' | t('stamped-io'),
-    suggestEnvVars: true,
-    name: 'productImageFieldTransformation',
-    value: settings.productImageFieldTransformation,
-    warning: macros.configWarning('productImageFieldTransformation', 'stamped-io'),
+{% set transforms = [{
+    label: 'Select an option' | t('stamped-io'),
+    value: '',
+}] %}
+
+{% for transform in craft.app.getAssetTransforms().getAllTransforms() %}
+    {% set transforms = transforms | merge([{
+        label: transform.name,
+        value: transform.handle,
+    }]) %}
+{% endfor %}
+
+{{ forms.selectField({
+    label: 'Product Image Transform' | t('stamped-io'),
+    instructions: 'Select an Image Transform for the Product Image to use.' | t('stamped-io'),
+    name: 'productImageFieldTransform',
+    value: settings.productImageFieldTransform,
+    options: transforms,
+    warning: macros.configWarning('productImageFieldTransform', 'stamped-io'),
 }) }}
