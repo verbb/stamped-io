@@ -63,6 +63,8 @@ class Service extends Component
 
     private function _getPayload($order)
     {
+        $settings = Stamped::$plugin->getSettings();
+        
         $payload = [
             'email' => $order->email,
             'firstName' => $order->billingAddress->firstName ?? '',
@@ -85,13 +87,27 @@ class Service extends Component
             } else {
                 $product = $lineItem->purchasable->product;
             }
+            
+            $variant = $lineItem->purchasable;
+            
+            $productImageField = $settings->productImageField;
+            
+            if ( $variant->$productImageField && $variant->$productImageField->count() ) {
+                if ($image = $variant->$productImageField->one()) {
+                    $lineItemProperties['ImageURL'] = $image->getUrl($settings->productImageFieldTransformation,true);
+                }
+            } else if ( $product->$productImageField && $product->$productImageField->count() ) {
+                if ($image = $product->$productImageField->one()) {
+                    $lineItemProperties['ImageURL'] = $image->getUrl($settings->productImageFieldTransformation,true);
+                }
+            }
 
             $payload['itemsList'][] = [
                 'productId' => $product->id ?? '',
                 'productBrand' => '',
                 'productDescription' => $product->title ?? '',
                 'productTitle' => $product->title ?? '',
-                'productImageUrl' => '',
+                'productImageUrl' => $imageUrl ?? '',
                 'productPrice' => $lineItem->salePrice ?? '',
                 'productType' => $product->type->name ?? '',
                 'productUrl' => $product->url ?? '',
