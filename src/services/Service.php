@@ -87,18 +87,19 @@ class Service extends Component
             } else {
                 $product = $lineItem->purchasable->product;
             }
-            
-            $variant = $lineItem->purchasable;
-            
-            $productImageField = $settings->productImageField;
-            
-            if ( $variant->$productImageField && $variant->$productImageField->count() ) {
-                if ($image = $variant->$productImageField->one()) {
-                    $lineItemProperties['ImageURL'] = $image->getUrl($settings->productImageFieldTransformation,true);
-                }
-            } else if ( $product->$productImageField && $product->$productImageField->count() ) {
-                if ($image = $product->$productImageField->one()) {
-                    $lineItemProperties['ImageURL'] = $image->getUrl($settings->productImageFieldTransformation,true);
+                        
+            // Fetch the image field. Will handle if the chosen asset field is on the product or variant
+            if ($productImageField = $settings->productImageField) {
+                $variant = $lineItem->purchasable;
+
+                if ($variant->$productImageField && $variant->$productImageField->count()) {
+                    if ($image = $variant->$productImageField->one()) {
+                        $imageUrl = $image->getUrl($settings->productImageFieldTransform, true);
+                    }
+                } else if ($product->$productImageField && $product->$productImageField->count()) {
+                    if ($image = $product->$productImageField->one()) {
+                        $imageUrl = $image->getUrl($settings->productImageFieldTransform, true);
+                    }
                 }
             }
 
