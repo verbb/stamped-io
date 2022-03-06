@@ -17,8 +17,8 @@ class Stamped extends Plugin
     // Properties
     // =========================================================================
 
-    public string $schemaVersion = '1.0.0';
     public bool $hasCpSettings = true;
+    public string $schemaVersion = '1.0.0';
 
 
     // Traits
@@ -26,7 +26,7 @@ class Stamped extends Plugin
 
     use PluginTrait;
 
-    
+
     // Public Methods
     // =========================================================================
 
@@ -56,11 +56,11 @@ class Stamped extends Plugin
             'settings' => $this->getSettings(),
         ]);
     }
-    
+
 
     // Private Methods
     // =========================================================================
-    
+
     private function _registerEventHandlers(): void
     {
         Event::on(Order::class, Order::EVENT_AFTER_COMPLETE_ORDER, [$this->getService(), 'handleCompletedOrder']);
