@@ -5,7 +5,6 @@ use verbb\stamped\Stamped;
 
 use craft\commerce\elements\Order;
 
-use Craft;
 use craft\queue\BaseJob;
 
 use yii\base\Exception;
@@ -15,13 +14,13 @@ class SendOrder extends BaseJob
     // Properties
     // =========================================================================
 
-    public $orderReference;
+    public ?string $orderReference = null;
 
 
     // Public Methods
     // =========================================================================
 
-    public function execute($queue)
+    public function execute($queue): void
     {
         $this->setProgress($queue, 1);
         
@@ -38,15 +37,13 @@ class SendOrder extends BaseJob
         if (!$result) {
             throw new Exception('Order #' . $this->orderReference . ' failed.');
         }
-
-        return $result;
     }
 
 
     // Protected Methods
     // =========================================================================
 
-    protected function defaultDescription(): string
+    protected function defaultDescription(): ?string
     {
         return 'Sending Order to Stamped';
     }

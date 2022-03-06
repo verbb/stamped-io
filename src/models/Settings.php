@@ -5,13 +5,13 @@ use craft\base\Model;
 
 class Settings extends Model
 {
-    // Public Properties
+    // Properties
     // =========================================================================
 
-    public $storeHash = '';
-    public $keyPublic = '';
-    public $keyPrivate = '';
-    public $productImageField = '';
-    public $productImageFieldTransform = '';
+    public string $storeHash = '';
+    public string $keyPublic = '';
+    public string $keyPrivate = '';
+    public string $productImageField = '';
+    public string $productImageFieldTransform = '';
 
 }

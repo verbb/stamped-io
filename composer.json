@@ -2,7 +2,7 @@
     "name": "verbb/stamped-io",
     "description": "Send your order data from Craft Commerce to Stamped.io, for your customers to review.",
     "type": "craft-plugin",
-    "version": "1.0.1",
+    "version": "2.0.0-beta.1",
     "keywords": [
         "craft",
         "cms",
@@ -25,8 +25,9 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^3.1.0",
-        "verbb/base": "^1.0.2"
+        "php": "^8.0.2",
+        "craftcms/cms": "^4.0.0-alpha",
+        "verbb/base": "^2.0.0-beta"
     },
     "autoload": {
         "psr-4": {
@@ -37,7 +38,7 @@
         "name": "Stamped",
         "handle": "stamped-io",
         "schemaVersion": "1.0.0",
-        "changelogUrl": "https://raw.githubusercontent.com/verbb/stamped-io/craft-3/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/stamped-io/craft-4/CHANGELOG.md",
         "class": "verbb\\stamped\\Stamped"
     }
 }

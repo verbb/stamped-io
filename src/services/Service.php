@@ -10,27 +10,28 @@ use Craft;
 use craft\base\Component;
 use craft\helpers\Json;
 
-use craft\commerce\Plugin as Commerce;
-use craft\commerce\elements\Order;
-
 use yii\base\Event;
+
+use Throwable;
+
+use GuzzleHttp\Client;
 
 class Service extends Component
 {
     // Public Methods
     // =========================================================================
 
-    public function handleCompletedOrder(Event $event)
+    public function handleCompletedOrder(Event $event): void
     {
         Stamped::log('Order #' . $event->sender->reference . ' completed.');
 
-        // Trigger the actual logic in a queue so we're not holding up the main thread
+        // Trigger the actual logic in a queue, so we're not holding up the main thread
         Craft::$app->getQueue()->priority(1)->push(new SendOrder([
             'orderReference' => $event->sender->reference,
         ]));
     }
 
-    public function sendOrderToStamped($order)
+    public function sendOrderToStamped($order): bool
     {
         try {
             Stamped::log('Preparing order #' . $order->reference . ' to be sent to Stamped.');
@@ -46,7 +47,7 @@ class Service extends Component
             Stamped::log('Order #' . $order->reference . ' sent to Stamped successfully.');
 
             return true;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             Stamped::error(Craft::t('app', '{e} - {f}: {l}.', [
                 'e' => $e->getMessage(),
                 'f' => $e->getFile(),
@@ -61,7 +62,7 @@ class Service extends Component
     // Private Methods
     // =========================================================================
 
-    private function _getPayload($order)
+    private function _getPayload($order): array
     {
         $settings = Stamped::$plugin->getSettings();
         
@@ -81,7 +82,7 @@ class Service extends Component
             'orderDate' => $order->dateOrdered->format('c'),
         ];
 
-        foreach ($order->lineItems as $key => $lineItem) {
+        foreach ($order->lineItems as $lineItem) {
             if ($lineItem->purchasable instanceof Voucher) {
                 $product = $lineItem->purchasable;
             } else {
@@ -118,7 +119,7 @@ class Service extends Component
         return $payload;
     }
 
-    private function _getClient()
+    private function _getClient(): Client
     {
         $settings = Stamped::$plugin->getSettings();
         $keyPublic = Craft::parseEnv($settings->keyPublic);

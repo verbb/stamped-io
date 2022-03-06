@@ -60,7 +60,7 @@
     value: '',
 }] %}
 
-{% for transform in craft.app.getAssetTransforms().getAllTransforms() %}
+{% for transform in craft.app.getImageTransforms().getAllTransforms() %}
     {% set transforms = transforms | merge([{
         label: transform.name,
         value: transform.handle,
