@@ -8,6 +8,7 @@ use verbb\giftvoucher\elements\Voucher;
 
 use Craft;
 use craft\base\Component;
+use craft\helpers\App;
 use craft\helpers\Json;
 
 use yii\base\Event;
@@ -122,9 +123,9 @@ class Service extends Component
     private function _getClient(): Client
     {
         $settings = Stamped::$plugin->getSettings();
-        $keyPublic = Craft::parseEnv($settings->keyPublic);
-        $keyPrivate = Craft::parseEnv($settings->keyPrivate);
-        $storeHash = Craft::parseEnv($settings->storeHash);
+        $keyPublic = App::parseEnv($settings->keyPublic);
+        $keyPrivate = App::parseEnv($settings->keyPrivate);
+        $storeHash = App::parseEnv($settings->storeHash);
 
         return Craft::createGuzzleClient([
             'base_uri' => "https://stamped.io/api/v2/{$storeHash}/",
