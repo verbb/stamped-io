@@ -5,7 +5,7 @@ This plugin provides integration with [Stamped.io](https://stamped.io/) by pushi
 ## Installation
 You can install Stamped.io via the plugin store, or through Composer.
 
-### Craft Plugin Store
+## Craft Plugin Store
 To install **Stamped.io**, navigate to the _Plugin Store_ section of your Craft control panel, search for `Stamped.io`, and click the _Try_ button.
 
 ### Composer
@@ -42,7 +42,7 @@ return [
 ];
 ```
 
-### Configuration options
+## Configuration options
 
 - `keyPublic` -Enter the API Key Public from your Stamped.io account.
 - `keyPrivate` - Enter the API Key Private from your Stamped.io account.
