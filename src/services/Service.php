@@ -50,7 +50,7 @@ class Service extends Component
             Stamped::error(Craft::t('app', '{e} - {f}: {l}.', [
                 'e' => $e->getMessage(),
                 'f' => $e->getFile(),
-                'l' => $e->getLine()
+                'l' => $e->getLine(),
             ]));
         }
 
@@ -64,14 +64,14 @@ class Service extends Component
     private function _getPayload($order)
     {
         $settings = Stamped::$plugin->getSettings();
-        
+
         $payload = [
             'email' => $order->email,
             'firstName' => $order->billingAddress->firstName ?? '',
             'lastName' => $order->billingAddress->lastName ?? '',
             'location' => $order->billingAddress->city ?? '',
             'phoneNumber' => $order->billingAddress->phone ?? '',
-            
+
             'orderNumber' => $order->id,
             'orderId' => $order->id,
             'orderCurrencyISO' => $order->paymentCurrency,
@@ -87,7 +87,7 @@ class Service extends Component
             } else {
                 $product = $lineItem->purchasable->product;
             }
-                        
+
             // Fetch the image field. Will handle if the chosen asset field is on the product or variant
             if ($productImageField = $settings->productImageField) {
                 $variant = $lineItem->purchasable;
