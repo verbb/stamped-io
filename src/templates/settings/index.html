@@ -38,7 +38,7 @@
 }] %}
 
 {% for field in craft.app.getFields().getAllFields() %}
-    {% if className(field) == 'craft\fields\Assets' %}
+    {% if className(field) == 'craft\\fields\\Assets' %}
         {% set assetFields = assetFields | merge([{
             label: field.name,
             value: field.handle,
