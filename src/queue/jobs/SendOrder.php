@@ -24,7 +24,7 @@ class SendOrder extends BaseJob
     {
         $this->setProgress($queue, 1);
 
-        Stamped::log('Order #' . $this->orderReference . ' in queue.');
+        Stamped::info('Order #' . $this->orderReference . ' in queue.');
 
         $order = Order::find()->reference($this->orderReference)->one();
 

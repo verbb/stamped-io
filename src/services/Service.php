@@ -24,7 +24,7 @@ class Service extends Component
 
     public function handleCompletedOrder(Event $event): void
     {
-        Stamped::log('Order #' . $event->sender->reference . ' completed.');
+        Stamped::info('Order #' . $event->sender->reference . ' completed.');
 
         // Trigger the actual logic in a queue, so we're not holding up the main thread
         Craft::$app->getQueue()->priority(1)->push(new SendOrder([
@@ -35,25 +35,25 @@ class Service extends Component
     public function sendOrderToStamped($order): bool
     {
         try {
-            Stamped::log('Preparing order #' . $order->reference . ' to be sent to Stamped.');
+            Stamped::info('Preparing order #' . $order->reference . ' to be sent to Stamped.');
 
             $payload = $this->_getPayload($order);
 
-            Stamped::log(Json::encode($payload));
+            Stamped::info(Json::encode($payload));
 
             $response = $this->_request('POST', 'survey/reviews/bulk', [
                 'json' => [$payload],
             ]);
 
-            Stamped::log('Order #' . $order->reference . ' sent to Stamped successfully.');
+            Stamped::info('Order #' . $order->reference . ' sent to Stamped successfully.');
 
             return true;
         } catch (Throwable $e) {
-            Stamped::error(Craft::t('app', '{e} - {f}: {l}.', [
+            Stamped::error('{e} - {f}: {l}.', [
                 'e' => $e->getMessage(),
                 'f' => $e->getFile(),
                 'l' => $e->getLine(),
-            ]));
+            ]);
         }
 
         return false;

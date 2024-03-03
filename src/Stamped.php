@@ -36,8 +36,6 @@ class Stamped extends Plugin
 
         self::$plugin = $this;
 
-        $this->_registerComponents();
-        $this->_registerLogTarget();
         $this->_registerEventHandlers();
     }
 
