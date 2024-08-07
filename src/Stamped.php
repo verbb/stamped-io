@@ -50,7 +50,7 @@ class Stamped extends Plugin
 
     protected function settingsHtml(): ?string
     {
-        return Craft::$app->view->renderTemplate('stamped-io/settings', [
+        return Craft::$app->getView()->renderTemplate('stamped-io/settings', [
             'settings' => $this->getSettings(),
         ]);
     }
