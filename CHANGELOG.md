@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.1 - 2025-07-18
+
+### Changed
+- Update English translations.
+- Craft 5/Commerce 5 compatibility.
+
 ## 3.0.0 - 2024-05-27
 
 ### Changed
