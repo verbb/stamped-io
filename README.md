@@ -1,4 +1,4 @@
-<p align="center"><img src="https://verbb.imgix.net/plugins/stamped-io/stamped-io-icon.svg" width="100" height="100" alt="Stamped.io icon"></p>
+<p align="center"><img src="https://assets.verbb.io/plugins/stamped-io/stamped-io-icon.svg" width="100" height="100" alt="Stamped.io icon"></p>
 <h1 align="center">Stamped.io for Craft CMS</h1>
 
 Stamped.io is a Craft CMS plugin that provides integration with [Stamped.io](https://stamped.io/) by pushing Craft Commerce order information to Stamped.io, to be added to a queue to be sent to your customers.
