@@ -14,4 +14,18 @@ class Settings extends Model
     public string $productImageField = '';
     public string $productImageFieldTransform = '';
 
+
+    // Protected Methods
+    // =========================================================================
+
+    protected function defineRules(): array
+    {
+        $rules = parent::defineRules();
+
+        $rules[] = [['keyPublic', 'keyPrivate', 'storeHash'], 'trim'];
+        $rules[] = [['keyPublic', 'keyPrivate', 'storeHash'], 'required'];
+
+        return $rules;
+    }
+
 }

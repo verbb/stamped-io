@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+- Normalize plugin settings CP chrome: full settings page with `verbb-base` layout, Settings → Plugins breadcrumbs, General Settings sidebar, top-right Save, and Twig form helpers (replaces the Craft Plugins settings slideout fragment).
+
 ## 3.0.1 - 2025-07-18
 
 ### Changed

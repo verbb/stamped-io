@@ -1,77 +1,91 @@
+{% extends 'stamped-io/_layouts/settings' %}
+
 {% import '_includes/forms' as forms %}
 {% import 'verbb-base/_macros' as macros %}
 
-{{ forms.autosuggestField({
-    first: true,
-    label: 'API Key Public' | t('stamped-io'),
-    instructions: 'Enter the API Key Public from your Stamped.io account.' | t('stamped-io'),
-    required: true,
-    suggestEnvVars: true,
-    name: 'keyPublic',
-    value: settings.keyPublic,
-    warning: macros.configWarning('keyPublic', 'stamped-io'),
-}) }}
+{% set fullPageForm = true %}
+{% set selectedTab = 'general' %}
+{% set pageTitle = 'General Settings' | t('stamped-io') %}
+{% set pageAction = 'plugins/save-plugin-settings' %}
+{% set pageUrl = 'stamped-io/settings' %}
 
-{{ forms.autosuggestField({
-    label: 'API Key Private' | t('stamped-io'),
-    instructions: 'Enter the API Key Private from your Stamped.io account.' | t('stamped-io'),
-    required: true,
-    suggestEnvVars: true,
-    name: 'keyPrivate',
-    value: settings.keyPrivate,
-    warning: macros.configWarning('keyPrivate', 'stamped-io'),
-}) }}
+{% block settingsContent %}
+    {{ forms.autosuggestField({
+        label: 'API Key Public' | t('stamped-io'),
+        instructions: 'Enter the API Key Public from your Stamped.io account.' | t('stamped-io'),
+        required: true,
+        suggestEnvVars: true,
+        name: 'keyPublic',
+        value: settings.keyPublic,
+        errors: settings.getErrors('keyPublic'),
+        warning: macros.configWarning('keyPublic', 'stamped-io'),
+    }) }}
 
-{{ forms.autosuggestField({
-    label: 'Store Hash' | t('stamped-io'),
-    instructions: 'Enter the Store Hash (or Store URL) from your Stamped.io account.' | t('stamped-io'),
-    required: true,
-    suggestEnvVars: true,
-    name: 'storeHash',
-    value: settings.storeHash,
-    warning: macros.configWarning('storeHash', 'stamped-io'),
-}) }}
+    {{ forms.autosuggestField({
+        label: 'API Key Private' | t('stamped-io'),
+        instructions: 'Enter the API Key Private from your Stamped.io account.' | t('stamped-io'),
+        required: true,
+        suggestEnvVars: true,
+        name: 'keyPrivate',
+        value: settings.keyPrivate,
+        errors: settings.getErrors('keyPrivate'),
+        warning: macros.configWarning('keyPrivate', 'stamped-io'),
+    }) }}
 
-{% set assetFields = [{
-    label: 'Select an option' | t('stamped-io'),
-    value: '',
-}] %}
+    {{ forms.autosuggestField({
+        label: 'Store Hash' | t('stamped-io'),
+        instructions: 'Enter the Store Hash (or Store URL) from your Stamped.io account.' | t('stamped-io'),
+        required: true,
+        suggestEnvVars: true,
+        name: 'storeHash',
+        value: settings.storeHash,
+        errors: settings.getErrors('storeHash'),
+        warning: macros.configWarning('storeHash', 'stamped-io'),
+    }) }}
 
-{% for field in craft.app.getFields().getAllFields() %}
-    {% if className(field) == 'craft\\fields\\Assets' %}
-        {% set assetFields = assetFields | merge([{
-            label: field.name,
-            value: field.handle,
+    {% set assetFields = [{
+        label: 'Select an option' | t('stamped-io'),
+        value: '',
+    }] %}
+
+    {% for field in craft.app.getFields().getAllFields() %}
+        {% if className(field) == 'craft\\fields\\Assets' %}
+            {% set assetFields = assetFields | merge([{
+                label: field.name,
+                value: field.handle,
+            }]) %}
+        {% endif %}
+    {% endfor %}
+
+    {{ forms.selectField({
+        label: 'Product Image' | t('stamped-io'),
+        instructions: 'Select the asset field used for your product image. This can be an asset field on the product or individual variant.' | t('stamped-io'),
+        name: 'productImageField',
+        value: settings.productImageField,
+        options: assetFields,
+        errors: settings.getErrors('productImageField'),
+        warning: macros.configWarning('productImageField', 'stamped-io'),
+    }) }}
+
+    {% set transforms = [{
+        label: 'Select an option' | t('stamped-io'),
+        value: '',
+    }] %}
+
+    {% for transform in craft.app.getImageTransforms().getAllTransforms() %}
+        {% set transforms = transforms | merge([{
+            label: transform.name,
+            value: transform.handle,
         }]) %}
-    {% endif %}
-{% endfor %}
+    {% endfor %}
 
-{{ forms.selectField({
-    label: 'Product Image' | t('stamped-io'),
-    instructions: 'Select the asset field used for your product image. This can be an asset field on the product or individual variant.' | t('stamped-io'),
-    name: 'productImageField',
-    value: settings.productImageField,
-    options: assetFields,
-    warning: macros.configWarning('productImageField', 'stamped-io'),
-}) }}
-
-{% set transforms = [{
-    label: 'Select an option' | t('stamped-io'),
-    value: '',
-}] %}
-
-{% for transform in craft.app.getImageTransforms().getAllTransforms() %}
-    {% set transforms = transforms | merge([{
-        label: transform.name,
-        value: transform.handle,
-    }]) %}
-{% endfor %}
-
-{{ forms.selectField({
-    label: 'Product Image Transform' | t('stamped-io'),
-    instructions: 'Select an Image Transform for the Product Image to use.' | t('stamped-io'),
-    name: 'productImageFieldTransform',
-    value: settings.productImageFieldTransform,
-    options: transforms,
-    warning: macros.configWarning('productImageFieldTransform', 'stamped-io'),
-}) }}
+    {{ forms.selectField({
+        label: 'Product Image Transform' | t('stamped-io'),
+        instructions: 'Select an Image Transform for the Product Image to use.' | t('stamped-io'),
+        name: 'productImageFieldTransform',
+        value: settings.productImageFieldTransform,
+        options: transforms,
+        errors: settings.getErrors('productImageFieldTransform'),
+        warning: macros.configWarning('productImageFieldTransform', 'stamped-io'),
+    }) }}
+{% endblock %}
