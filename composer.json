@@ -1,6 +1,6 @@
 {
     "name": "verbb/stamped-io",
-    "description": "Send your order data from Craft Commerce to Stamped.io, for your customers to review.",
+    "description": "A Craft CMS plugin for sending Craft Commerce orders to Stamped.io for review requests.",
     "type": "craft-plugin",
     "version": "3.0.3",
     "keywords": [
