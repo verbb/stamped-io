@@ -98,7 +98,7 @@ class Service extends Component
                     if ($image = $variant->$productImageField->one()) {
                         $imageUrl = $image->getUrl($settings->productImageFieldTransform, true);
                     }
-                } else if ($product->$productImageField && $product->$productImageField->count()) {
+                } elseif ($product->$productImageField && $product->$productImageField->count()) {
                     if ($image = $product->$productImageField->one()) {
                         $imageUrl = $image->getUrl($settings->productImageFieldTransform, true);
                     }
