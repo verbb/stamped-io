@@ -39,8 +39,6 @@ class Service extends Component
 
             $payload = $this->_getPayload($order);
 
-            Stamped::info(Json::encode($payload));
-
             $response = $this->_request('POST', 'survey/reviews/bulk', [
                 'json' => [$payload],
             ]);
@@ -49,10 +47,10 @@ class Service extends Component
 
             return true;
         } catch (Throwable $e) {
-            Stamped::error('{e} - {f}: {l}.', [
-                'e' => $e->getMessage(),
-                'f' => $e->getFile(),
-                'l' => $e->getLine(),
+            // HTTP exception messages can include response bodies, so log only allowlisted metadata.
+            Stamped::error('Unable to send order #{order} to Stamped ({exception}).', [
+                'order' => $order->reference,
+                'exception' => $e::class,
             ]);
         }
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+- Fixed a moderate-severity sensitive information exposure vulnerability.
+
 ## 3.0.5 - 2026-10-02
 
 ### Changed
