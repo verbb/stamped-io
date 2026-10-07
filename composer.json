@@ -2,7 +2,7 @@
     "name": "verbb/stamped-io",
     "description": "A Craft CMS plugin for sending Craft Commerce orders to Stamped.io for review requests.",
     "type": "craft-plugin",
-    "version": "3.0.6",
+    "version": "3.0.7",
     "keywords": [
         "craft",
         "cms",
