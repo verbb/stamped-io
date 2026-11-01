@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed orders containing a donation or custom line item failing to send to Stamped.
+- Fixed a line item without a product image using the image from an earlier line item when sending an order to Stamped.
 
 ## 3.0.7 - 2026-10-07
 

@@ -90,6 +90,8 @@ class Service extends Component
                 continue;
             }
 
+            $imageUrl = null;
+
             // Fetch the image field. Will handle if the chosen asset field is on the product or variant
             if ($productImageField = $settings->productImageField) {
                 $variant = $lineItem->purchasable;
