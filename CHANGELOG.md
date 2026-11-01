@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+- Fixed orders containing a donation or custom line item failing to send to Stamped.
+
 ## 3.0.7 - 2026-10-07
 
 ### Changed

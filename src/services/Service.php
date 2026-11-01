@@ -82,10 +82,12 @@ class Service extends Component
         ];
 
         foreach ($order->lineItems as $lineItem) {
-            if ($lineItem->purchasable instanceof Voucher) {
-                $product = $lineItem->purchasable;
-            } else {
-                $product = $lineItem->purchasable->product;
+            // Custom line items and purchasables without a product (such as donations) have nothing to review
+            $purchasable = $lineItem->purchasableId ? $lineItem->getPurchasable() : null;
+            $product = $purchasable instanceof Voucher ? $purchasable : ($purchasable->product ?? null);
+
+            if (!$product) {
+                continue;
             }
 
             // Fetch the image field. Will handle if the chosen asset field is on the product or variant
