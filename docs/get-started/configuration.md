@@ -1,8 +1,8 @@
 # Configuration
 
-You can customise Stamped.io’s settings using a PHP configuration file. The file is optional; you can enter the required account credentials in the control panel instead.
+You can customise Stamped.io’s settings using a PHP configuration file. This is optional: each setting has a default, so you only need to include the values you want to change.
 
-To override a setting, create `stamped-io.php` in your Craft project's `/config` directory. For example, this supplies the store identifier:
+To override a setting, create `stamped-io.php` in your Craft project’s `/config` directory and return an array of setting names and values. For example, the following will set your store hash, with your own value in place of the placeholder:
 
 ```php
 <?php
@@ -12,7 +12,7 @@ return [
 ];
 ```
 
-Replace the example value with your actual store hash. The public and private API keys must also be supplied through the settings. See [Usage](docs:feature-tour/usage) for connecting your store and checking a completed order.
+All other settings keep their defaults. Add any further settings you want to change to the same array. The options below explain the available settings and their defaults. You can also manage these settings in the control panel under **Settings → Stamped**.
 
 ## Configuration Options
 - `keyPublic` -Enter the API Key Public from your Stamped.io account.
@@ -31,7 +31,3 @@ Enter the API Key Private from your Stamped.io account.
 
 Enter the Store Hash from your Stamped.io account.
 :::
-
-
-## Control Panel
-You can also manage configuration settings through the Control Panel by visiting Settings → Stamped.

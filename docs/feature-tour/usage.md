@@ -1,12 +1,12 @@
 # Usage
 
-Stamped.io sends completed Craft Commerce orders to Stamped through Craft's queue. Stamped then handles the review-request workflow. Completing an order and delivering a review request are separate steps, so check both sides when setting up the integration.
+The plugin sends completed Craft Commerce orders to Stamped.io through Craft's queue. Stamped.io then handles the review-request workflow. Completing an order and delivering a review request are separate steps, so check both sides when setting up the integration.
 
 ## Connect Your Store
 
-Open **Settings → Stamped** in the control panel and enter the public API key, private API key and store hash from the Stamped account for this store. Save the settings. The [Configuration](docs:get-started/configuration) page identifies the corresponding PHP settings if you manage credentials through a configuration file.
+Open **Settings → Stamped** in the control panel and enter the public API key, private API key and store hash from the Stamped.io account for this store. Save the settings. The [Configuration](docs:get-started/configuration) page identifies the corresponding PHP settings if you manage credentials through a configuration file.
 
-Use an order and customer address you control for the first test. Review your Stamped review-request settings before sending it, because the receiving service controls what happens after the order arrives.
+Use an order and customer address you control for the first test. Review your Stamped.io review-request settings before sending it, because the receiving service controls what happens after the order arrives.
 
 ## Complete an Order
 
@@ -16,6 +16,6 @@ Check the queue after completion. A pending job has not finished transmitting th
 
 ## Confirm Delivery
 
-Find the test order in your Stamped account and compare its customer and order information with Commerce. Seeing the queue job complete confirms that the plugin finished its send operation; checking the receiving account confirms that the data is available where you expect it.
+Find the test order in your Stamped.io account and compare its customer and order information with Commerce. Seeing the queue job complete confirms that the plugin finished its send operation; checking the receiving account confirms that the data is available where you expect it.
 
-If the order is missing, first check whether the queue job exists and has completed. Then verify that the credentials identify the intended store. Review-request timing and email delivery are controlled in Stamped rather than by Craft's queue.
+If the order is missing, first check whether the queue job exists and has completed. Then verify that the credentials identify the intended store. Review-request timing and email delivery are controlled in Stamped.io rather than by Craft's queue.
